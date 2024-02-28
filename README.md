@@ -2,7 +2,7 @@
 
 A simple golang/gin app deployed to Kubernetes on AWS EKS.
 
-The example shows how easy it is to deploy a containerized application to Amazon EKS. Pulumi does the following:
+Pulumi does the following:
 - Builds the Docker images
 - Provisions AWS Container Registry (ECR) instance
 - Pushes the images to the ECR instance
@@ -23,7 +23,7 @@ The example shows how easy it is to deploy a containerized application to Amazon
 1. Create a new stack:
 
 	```bash
-	$ pulumi stack init pulumi-aws-ts-k8s-go
+	$ pulumi stack init prod
 	```
 
 2. Set the AWS region and environment variables:
@@ -40,9 +40,20 @@ The example shows how easy it is to deploy a containerized application to Amazon
 
 ## Clean up
 
-To clean up resources, run `pulumi destroy` and answer the confirmation question at the prompt.
+To clean up resources, run `pulumi destroy -s prod`
 
 ## Misc. Commands
 
+Grab URNs to target orphaned resources
 * `pulumi stack --show-urns`
 * `pulumi destroy --target urn:pulumi:pulumi-aws-ts-k8s-go::hello-go::eks:index:Cluster::eksCluster -y --target-dependents`
+
+Interact with EKS cluster
+* `pulumi stack output kubeConfig --show-secrets > kubeconfig`
+* `export KUBECONFIG=$PWD/kubeconfig`
+
+Stack commands
+* `pulumi stack ls`
+* `pulumi stack select prod`
+* `pulumi up -s prod`
+* `pulumi stack rm prod`
