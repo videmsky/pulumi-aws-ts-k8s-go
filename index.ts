@@ -10,7 +10,7 @@ const helloMessage = config.require("hello_message");
 
 // eks cluster component
 const eksCluster = new eks.Cluster("eksCluster", {
-	name: "eksCluster",
+	name: `eksCluster-${pulumi.getStack()}`,
 	instanceType: "t3a.medium",
 	desiredCapacity: 3,
 	minSize: 2,
